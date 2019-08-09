@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import MainNavigation from '../components/MainNavigation';
-import { removeProductFromCart } from '../store/actions';
 import './Cart.css';
 
 class CartPage extends Component {
@@ -20,12 +19,7 @@ class CartPage extends Component {
                   {cartItem.quantity})
                 </div>
                 <div>
-                  <button
-                    onClick={this.props.removeProductFromCart.bind(
-                      this,
-                      cartItem.id
-                    )}
-                  >
+                  <button>
                     Remove from Cart
                   </button>
                 </div>
@@ -48,9 +42,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    removeProductFromCart: id => dispatch(removeProductFromCart(id))
-  };
+  return {  };
 };
 
 export default connect(

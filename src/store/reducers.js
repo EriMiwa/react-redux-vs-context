@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_TO_CART, REMOVE_PRODUCT_FROM_CART } from './actions';
+import { ADD_PRODUCT_TO_CART } from './actions';
 
 const initialState = {
   products: [
@@ -30,23 +30,6 @@ const shopReducer = (state = initialState, action) => {
         updatedItem.quantity++;
         updatedCart[updatedItemIndex] = updatedItem;
       }
-      return { ...state, cart: updatedCart };
-    case REMOVE_PRODUCT_FROM_CART:
-      updatedCart = [...state.cart];
-      updatedItemIndex = updatedCart.findIndex(
-        item => item.id === action.payload
-      );
-
-      const updatedItem = {
-        ...updatedCart[updatedItemIndex]
-      };
-      updatedItem.quantity--;
-      if (updatedItem.quantity <= 0) {
-        updatedCart.splice(updatedItemIndex, 1);
-      } else {
-        updatedCart[updatedItemIndex] = updatedItem;
-      }
-
       return { ...state, cart: updatedCart };
     default:
       return state;
