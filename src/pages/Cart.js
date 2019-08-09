@@ -11,8 +11,7 @@ class CartPage extends Component {
         <MainNavigation cartItemNumber={this.props.cartItemCount} />
         <main className="cart">
           <div>Please get the cartItems from the redux store</div>
-          {/* {this.props.cartItems.length <= 0 && <p>No Item in the Cart!</p>}
-          <ul>
+          {/* <ul>
             {this.props.cartItems.map(cartItem => (
               <li key={cartItem.id}>
                 <div>
