@@ -10,7 +10,8 @@ class CartPage extends Component {
       <React.Fragment>
         <MainNavigation cartItemNumber={this.props.cartItemCount} />
         <main className="cart">
-          {this.props.cartItems.length <= 0 && <p>No Item in the Cart!</p>}
+          <div>Please get the cartItems from the redux store</div>
+          {/* {this.props.cartItems.length <= 0 && <p>No Item in the Cart!</p>}
           <ul>
             {this.props.cartItems.map(cartItem => (
               <li key={cartItem.id}>
@@ -25,7 +26,7 @@ class CartPage extends Component {
                 </div>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </main>
       </React.Fragment>
     );
@@ -34,7 +35,6 @@ class CartPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    cartItems: state.cart,
     cartItemCount: state.cart.reduce((count, curItem) => {
       return count + curItem.quantity;
     }, 0)
