@@ -41,8 +41,8 @@ const shopReducer = (state = initialState, action) => {
         const updatedItem = {
           ...updatedCart[updatedItemIndex]
         };
-        if(updatedItem.quantity === 1) {
-          const Cart = updatedCart.filter(updatedItem => updatedItem.quantity > 1);
+        if(updatedItem.quantity == 0) {
+          const Cart = updatedCart.filter(updatedItem => updatedItem.quantity >= 1);
           updatedCart = Cart;
         } else {
           updatedItem.quantity--;
