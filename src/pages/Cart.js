@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+
 import MainNavigation from '../components/MainNavigation';
+import { removeProductFromCart } from '../store/actions';
 import './Cart.css';
 
 class CartPage extends Component {
@@ -10,8 +12,7 @@ class CartPage extends Component {
       <React.Fragment>
         <MainNavigation cartItemNumber={this.props.cartItemCount} />
         <main className="cart">
-          <div>Please get the cartItems from the redux store</div>
-          {/* <ul>
+          <ul>
             {this.props.cartItems.map(cartItem => (
               <li key={cartItem.id}>
                 <div>
@@ -19,29 +20,34 @@ class CartPage extends Component {
                   {cartItem.quantity})
                 </div>
                 <div>
-                  <button>
+                  <button onClick={this.props.removeProductFromCart.bind(this, cartItem)}>
                     Remove from Cart
                   </button>
                 </div>
               </li>
             ))}
-          </ul> */}
+          </ul>
         </main>
       </React.Fragment>
     );
   }
 }
 
+//getter:read state
 const mapStateToProps = state => {
   return {
+    cartItems: state.cart,
     cartItemCount: state.cart.reduce((count, curItem) => {
       return count + curItem.quantity;
     }, 0)
   };
 };
 
+//function / action
 const mapDispatchToProps = dispatch => {
-  return {  };
+  return { 
+    removeProductFromCart: cartItem => dispatch(removeProductFromCart(cartItem))
+   };
 };
 
 export default connect(
