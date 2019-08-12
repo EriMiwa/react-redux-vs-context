@@ -13,46 +13,51 @@ const initialState = {
 };
 
 const shopReducer = (state = initialState, action) => {
-  let updatedCart;
-  let updatedItemIndex;
+
   switch (action.type) {
     case ADD_PRODUCT_TO_CART:
-      updatedCart = [...state.cart];
-      updatedItemIndex = updatedCart.findIndex(
-        item => item.id === action.payload.id
-      );
-
-      if (updatedItemIndex < 0) {
-        updatedCart.push({ ...action.payload, quantity: 1 });
-      } else {
-        const updatedItem = {
-          ...updatedCart[updatedItemIndex]
-        };
-        updatedItem.quantity++;
-        updatedCart[updatedItemIndex] = updatedItem;
-      }
-      return { ...state, cart: updatedCart };
-
+      return addProductToCart(state, action);
     case REMOVE_PRODUCT_FROM_CART:
-        updatedCart = [...state.cart];
-        updatedItemIndex = updatedCart.findIndex(
-          item => item.id === action.payload.id
-        );
-        const updatedItem = {
-          ...updatedCart[updatedItemIndex]
-        };
-        if(updatedItem.quantity == 0) {
-          const Cart = updatedCart.filter(updatedItem => updatedItem.quantity >= 1);
-          updatedCart = Cart;
-        } else {
-          updatedItem.quantity--;
-          updatedCart[updatedItemIndex] = updatedItem;
-        }
-        return { ...state, cart: updatedCart };
-
+      return removeProductFromCart(state, action);
     default:
       return state;
   }
+
+  function addProductToCart() {
+    let updatedCart;
+    let updatedItemIndex;
+
+    updatedCart = [...state.cart];
+    updatedItemIndex = updatedCart.findIndex(
+      item => item.id === action.payload.id
+    );
+
+    if (updatedItemIndex < 0) {
+      updatedCart.push({ ...action.payload, quantity: 1 });
+    } else {
+      const updatedItem = {
+        ...updatedCart[updatedItemIndex]
+      };
+      updatedItem.quantity++;
+      updatedCart[updatedItemIndex] = updatedItem;
+    }
+    return { ...state, cart: updatedCart };
+  }
+
+  function removeProductFromCart(state, action) {
+    let cartItems = state.cart;
+    const itemId = action.payload;
+    
+    cartItems = cartItems.filter(item => {
+      return item.id !== itemId
+    })
+
+    return {
+      ...state,
+      cart: cartItems
+    }
+  }
+
 };
 
 export default shopReducer;

@@ -7,6 +7,11 @@ import { removeProductFromCart } from '../store/actions';
 import './Cart.css';
 
 class CartPage extends Component {
+
+  removeProductFromCart = (itemId) => {
+    this.props.removeProductFromCart(itemId)
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -20,7 +25,7 @@ class CartPage extends Component {
                   {cartItem.quantity})
                 </div>
                 <div>
-                  <button onClick={this.props.removeProductFromCart.bind(this, cartItem)}>
+                  <button onClick={()=>this.removeProductFromCart(cartItem.id)}>
                     Remove from Cart
                   </button>
                 </div>
@@ -33,7 +38,7 @@ class CartPage extends Component {
   }
 }
 
-//getter:read state
+//the state
 const mapStateToProps = state => {
   return {
     cartItems: state.cart,
@@ -46,7 +51,7 @@ const mapStateToProps = state => {
 //function / action
 const mapDispatchToProps = dispatch => {
   return { 
-    removeProductFromCart: cartItem => dispatch(removeProductFromCart(cartItem))
+    removeProductFromCart: itemId => dispatch(removeProductFromCart(itemId))
    };
 };
 

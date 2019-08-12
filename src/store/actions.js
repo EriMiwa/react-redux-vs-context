@@ -12,13 +12,9 @@ export const addProductToCart = product => {
   };
 };
 
-export const removeProductFromCart = cartItem => {
-  return dispatch => {
-    setTimeout(() => {
-      dispatch({
-        type: REMOVE_PRODUCT_FROM_CART,
-        payload: cartItem
-      });
-    }, 700);
-  };
+  export const removeProductFromCart = itemId => {
+  return dispatch => dispatch({
+    type: REMOVE_PRODUCT_FROM_CART,
+    payload: itemId
+  });
 };
